@@ -1,0 +1,38 @@
+clase figura:
+    atributos:
+        posicion (char * int)
+        tipo (char)
+        numMovs (int)
+    metodos:
+        constructor (string) : unit # primer caracter es el tipo, segundo la primera, numMovs se inicializa a 1
+            cordenada de posicion, y el tercer caracter lo transforma a int y lo pones en la cordenada de segunda
+        getPosition () : (char * int) # devuelve la posicion en la que se encuentra la figura
+        come (otra : figura) : bool # devuelve true si puedde comer y false si no puede,
+            si puede comer modifica la posicion actual de la figura a la de la otra, no puede comer si numMovs esta a 2
+            ademas si puede comer tambien le suma 1 al campo numMovs
+        getPossibleDestinations () : (char * int) # no puede haber ninguna posicion que este fuera del tablero de 8 * 8
+        getType () : char # devuelve el tipo
+
+clase peon que extiende de figura:
+    metodos:
+        redefine el getPossibleDestinations a sus posibles destinos, en este caso solo puede saltar a la casilla de la izquierda superior o a la derecha superior, y en la lista de los posibles a los que salto no puede estar nincuna casilla que se salga del tablero
+
+
+
+
+funcion solo_chess:
+    recibe una lista de figuras y la transforma a una de objetos con la funcion crear_lista_figuras
+    despues iteraria entre ellas de forma que si la primera come alguna del resto, pues la come, sino pues iteraria con la segunda y asi sucesivamente con el resto
+    si puede comer pues la comeria y eliminaria la que comio de la lista y llamaria recursivamente a la funcion de solo chess con la nueva lista, recuerda que esta el metodo to string, y asi sucesivamente, en caso de que no encuentre ninguna que coma a otra pues que lance un raise
+    el objetivo de la funcion es ir comiendo unas figuras a otras hasta llegar a que solo quede en el tablero una figura, es muy importante destacar que la funcion no podra ser recursiva terminal debido al problema, y que ademas un estado puede llevar a dos diferentes por el que si escoges el primero se puede cerrar y hay que irse por la otra rama en ese caso
+    la funcion devuelve el orden de los movimientos que se hicieron, osea tal y como pone en el enunciado
+
+
+
+
+
+
+
+
+
+comprobar que no haya piezas en el medio de una accion
